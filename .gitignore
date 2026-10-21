@@ -1,0 +1,29 @@
+__pycache__/
+*.pyc
+.DS_Store
+.streamlit/secrets.toml
+.env
+.venv/
+venv/
+
+# Scala and SBT build files
+scala-rdd/target/
+scala-rdd/project/target/
+scala-rdd/project/project/
+.bsp/
+.metals/
+
+# Spark temporary files
+outputs/stream_checkpoint/
+spark-warehouse/
+derby.log
+
+# Incomplete Kafka download
+kafka.tgz
+
+# Local expense data
+data/expenses.csv
+data/stream_input/*.csv
+
+# Generated prediction output
+outputs/*.json
