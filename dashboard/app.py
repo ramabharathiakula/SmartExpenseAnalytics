@@ -5,7 +5,9 @@ import plotly.express as px
 from pathlib import Path
 from datetime import date
 import sys
+import subprocess
 from pathlib import Path
+
 
 ROOT_DIR = Path(__file__).resolve().parent.parent
 if str(ROOT_DIR) not in sys.path:
@@ -208,6 +210,18 @@ st.subheader("🔮 Monthly Expense Prediction")
 prediction_file = project_dir / "outputs" / "expense_prediction.json"
 
 try:
+    if not prediction_file.exists():
+        result = subprocess.run(
+            [sys.executable, str(project_dir / "src" / "expense_prediction.py")],
+            cwd=str(project_dir),
+            capture_output=True,
+            text=True,
+            timeout=60,
+        )
+
+        if result.returncode != 0:
+            raise RuntimeError(result.stderr or result.stdout)
+
     with open(prediction_file, "r") as file:
         prediction_data = json.load(file)
 
